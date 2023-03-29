@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-  ChakraProvider,
-  Box,
-  Grid,
-  GridItem,
-  theme,
-  Button,
-  Text,
-  VStack,
-} from '@chakra-ui/react';
+import { ChakraProvider, Box, theme } from '@chakra-ui/react';
 
 import TimerList from './components/TimerList';
 import AddTimer from './components/AddTimer';
@@ -17,7 +8,8 @@ function App() {
   const [timerData, setTimerData] = React.useState([]);
 
   const handleAddTimer = newTimer => {
-    setTimerData([...timerData, newTimer]);
+    const id = Date.now().toString();
+    setTimerData([...timerData, { ...newTimer, id }]);
   };
 
   return (

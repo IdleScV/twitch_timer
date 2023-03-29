@@ -4,9 +4,6 @@ import {
   Button,
   IconButton,
   Input,
-  InputGroup,
-  InputLeftElement,
-  InputRightElement,
   FormControl,
   FormLabel,
   Stack,
@@ -45,7 +42,7 @@ const AddTimer = ({ onAddTimer }) => {
   };
 
   return (
-    <Box>
+    <Box my={2}>
       <IconButton
         icon={isOpen ? <CloseIcon /> : <AddIcon />}
         aria-label={isOpen ? 'Close Timer' : 'Add Timer'}
@@ -53,7 +50,7 @@ const AddTimer = ({ onAddTimer }) => {
         onClick={onToggle}
       />
       {isOpen && (
-        <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p="4">
+        <Box borderWidth="1px" borderRadius="lg" overflow="hidden" p="4" my={2}>
           <Stack spacing={4}>
             <FormControl id="taskName">
               <FormLabel>Task Name</FormLabel>
