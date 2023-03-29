@@ -42,7 +42,15 @@ const AddTimer = ({ onAddTimer }) => {
   };
 
   return (
-    <Box my={2}>
+    <Box
+      my={2}
+      background="gray.50"
+      borderWidth="1px"
+      borderRadius="lg"
+      overflow="hidden"
+      p="4"
+      mb={10}
+    >
       <IconButton
         icon={isOpen ? <CloseIcon /> : <AddIcon />}
         aria-label={isOpen ? 'Close Timer' : 'Add Timer'}

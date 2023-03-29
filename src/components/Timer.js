@@ -78,11 +78,11 @@ function Timer({ timerData }) {
 
   return (
     <Grid
-      backgroundColor={'lightgreen'}
+      backgroundColor={isComplete ? 'gray.300' : 'gray.50'}
       width={'98vw'}
       templateColumns="repeat(3, 1fr)"
       gap={2}
-      borderWidth="3px"
+      borderWidth="1px"
       borderRadius="md"
       overflow="hidden"
       p="2"
