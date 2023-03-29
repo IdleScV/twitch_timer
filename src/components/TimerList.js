@@ -14,7 +14,7 @@ const TimerList = ({ data }) => {
   });
 
   return (
-    <VStack width={'100%'} spacing={2}>
+    <VStack width={'100%'} spacing={2} bg="lightgreen">
       {sortedData.map(timer => {
         return <Timer timerData={timer} key={timer.id} />;
       })}

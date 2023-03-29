@@ -14,7 +14,13 @@ function App() {
 
   return (
     <ChakraProvider theme={theme}>
-      <Box textAlign="center" fontSize="xl" p="2">
+      <Box
+        textAlign="center"
+        fontSize="xl"
+        p="2"
+        bg="lightgreen"
+        height="100vh"
+      >
         <AddTimer onAddTimer={handleAddTimer} />
         <TimerList data={timerData} />
       </Box>

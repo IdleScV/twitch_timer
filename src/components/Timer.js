@@ -109,7 +109,7 @@ function Timer({ timerData }) {
       </GridItem>
       <GridItem colSpan={1} textAlign="right">
         {!isRunning && !isComplete && (
-          <Button size="sm" colorScheme="green" onClick={handleStart}>
+          <Button size="sm" colorScheme="red" onClick={handleStart}>
             Start
           </Button>
         )}
