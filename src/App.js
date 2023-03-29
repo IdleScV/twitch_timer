@@ -12,6 +12,10 @@ function App() {
     setTimerData([...timerData, { ...newTimer, id }]);
   };
 
+  const handleRemove = id => {
+    setTimerData(timerData.filter(timer => timer.id !== id));
+  };
+
   return (
     <ChakraProvider theme={theme}>
       <Box
@@ -22,7 +26,7 @@ function App() {
         height="100vh"
       >
         <AddTimer onAddTimer={handleAddTimer} />
-        <TimerList data={timerData} />
+        <TimerList data={timerData} handleRemove={handleRemove} />
       </Box>
     </ChakraProvider>
   );

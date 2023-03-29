@@ -15,7 +15,7 @@ import {
 } from '@chakra-ui/react';
 import { FaBars } from 'react-icons/fa';
 
-function Timer({ timerData }) {
+function Timer({ timerData, handleRemove }) {
   const [timeLeft, setTimeLeft] = useState(timerData.timeSet);
   const [isRunning, setIsRunning] = useState(false);
   const [isComplete, setIsComplete] = useState(false);
@@ -114,41 +114,76 @@ function Timer({ timerData }) {
           </Button>
         )}
 
-        <Menu>
-          <MenuButton
-            ml={2}
-            as={IconButton}
-            icon={<FaBars />}
-            variant="outline"
-            size="sm"
-            _hover={{ backgroundColor: 'gray.100' }}
-            _active={{ backgroundColor: 'gray.200' }}
-          />
-          {isRunning ? (
-            <MenuList size="sm">
-              <MenuItem onClick={handlePause}>Pause</MenuItem>
-              <MenuItem onClick={() => handleAddMinutes(5)}>
-                Add 5 mins
-              </MenuItem>
-              <MenuItem onClick={handleReset}>Reset</MenuItem>
-            </MenuList>
-          ) : isComplete ? (
-            <MenuList size="sm">
-              <MenuItem onClick={handleReset}>Reset</MenuItem>
-            </MenuList>
-          ) : (
-            <MenuList size="sm">
-              <MenuItem onClick={handleStart}>Start</MenuItem>
-              <MenuItem onClick={() => handleAddMinutes(5)}>
-                Add 5 mins
-              </MenuItem>
-              <MenuItem onClick={handleReset}>Reset</MenuItem>
-            </MenuList>
-          )}
-        </Menu>
+        <CustomMenu
+          handlePause={handlePause}
+          handleAddMinutes={handleAddMinutes}
+          handleReset={handleReset}
+          handleStart={handleStart}
+          isRunning={isRunning}
+          isComplete={isComplete}
+          handleRemove={() => handleRemove(timerData.id)}
+        />
       </GridItem>
     </Grid>
   );
 }
 
 export default Timer;
+
+const CustomMenu = ({
+  handlePause,
+  handleAddMinutes,
+  handleReset,
+  handleStart,
+  isRunning,
+  isComplete,
+  handleRemove,
+}) => {
+  const [menuItems, setMenuItems] = useState([
+    {
+      label: 'Reset',
+      onClick: handleReset,
+    },
+    {
+      label: 'Start',
+      onClick: handleStart,
+      isHidden: isRunning || isComplete,
+    },
+    {
+      label: 'Pause',
+      onClick: handlePause,
+      isHidden: !isRunning,
+    },
+    {
+      label: 'Remove',
+      onClick: handleRemove,
+    },
+    {
+      label: 'Add 5 mins',
+      onClick: () => handleAddMinutes(5),
+    },
+  ]);
+
+  const visibleMenuItems = menuItems.filter(menuItem => !menuItem.isHidden);
+
+  return (
+    <Menu>
+      <MenuButton
+        ml={2}
+        as={IconButton}
+        icon={<FaBars />}
+        variant="outline"
+        size="sm"
+        _hover={{ backgroundColor: 'gray.100' }}
+        _active={{ backgroundColor: 'gray.200' }}
+      />
+      <MenuList size="sm">
+        {visibleMenuItems.map(menuItem => (
+          <MenuItem key={menuItem.label} onClick={menuItem.onClick}>
+            {menuItem.label}
+          </MenuItem>
+        ))}
+      </MenuList>
+    </Menu>
+  );
+};
